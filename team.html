@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team – ICC Mongolia</title>
+    <meta name="description" content="Meet the leadership team of ICC Mongolia.">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary: #007dff;
+            --primary-hover: #0066d6;
+            --blue-light: #e3f1ff;
+            --dark: #161616;
+            --grey-500: #575b60;
+            --grey-400: #767676;
+            --grey-250: #f1f3f5;
+            --grey-200: #dcdcdc;
+            --white: #ffffff;
+            --max-width: 1320px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Gellix', Helvetica, Arial, sans-serif; color: var(--dark); background: var(--white); font-size: 16px; line-height: 1.6; }
+
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+        /* ── TOP BAR ── */
+        .topbar {
+            background: var(--white);
+            color: var(--dark);
+            font-size: 13px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--grey-200);
+        }
+        .topbar__inner {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+        }
+        .topbar a { color: var(--grey-500); transition: color .2s; }
+        .topbar a:hover { color: var(--primary); }
+
+        /* Lang toggle button */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--grey-250);
+            border: 1px solid var(--grey-200);
+            color: var(--dark);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 3px 10px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background .2s;
+        }
+        .lang-toggle:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+        /* ── HEADER ── */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--grey-200);
+            transition: box-shadow .3s;
+        }
+        .site-header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+        .header__inner {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            height: 72px;
+        }
+        .header__logo { display: flex; align-items: center; flex-shrink: 0; }
+        .header__logo img { height: 68px; width: auto; }
+        .header__nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+        .nav__item { position: relative; }
+        .nav__link {
+            display: flex; align-items: center; gap: 4px;
+            padding: 8px 14px;
+            font-size: 14px; font-weight: 500; color: var(--dark);
+            transition: color .2s;
+            white-space: nowrap;
+        }
+        .nav__link:hover { color: var(--primary); }
+        .nav__link svg { width: 12px; height: 12px; transition: transform .2s; flex-shrink: 0; }
+        .nav__item:hover .nav__link svg { transform: rotate(180deg); }
+        .nav__dropdown {
+            position: absolute;
+            top: calc(100% + 1px);
+            left: 0;
+            min-width: 220px;
+            background: var(--white);
+            border-top: 3px solid var(--primary);
+            box-shadow: 0 8px 32px rgba(0,0,0,.12);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(8px);
+            transition: opacity .2s, transform .2s;
+            z-index: 200;
+        }
+        .nav__item:hover .nav__dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
+        .nav__dropdown a {
+            display: block;
+            padding: 12px 20px;
+            font-size: 14px;
+            color: var(--dark);
+            border-bottom: 1px solid var(--grey-200);
+            transition: background .15s, color .15s;
+        }
+        .nav__dropdown a:last-child { border-bottom: none; }
+        .nav__dropdown a:hover { background: var(--grey-250); color: var(--primary); }
+        .header__actions { display: flex; align-items: center; gap: 12px; margin-left: 16px; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-weight: 600; font-size: 14px; padding: 10px 20px; transition: background .2s, color .2s, border-color .2s; cursor: pointer; border: 2px solid transparent; }
+        .btn--primary { background: var(--primary); color: var(--white); }
+        .btn--primary:hover { background: var(--primary-hover); }
+        .btn--search { padding: 8px; background: none; color: var(--grey-500); border: none; }
+        .btn--search:hover { color: var(--primary); }
+        .burger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+        .burger span { display: block; width: 22px; height: 2px; background: var(--dark); }
+
+        /* ── MOBILE NAV ── */
+        .mobile-nav {
+            position: fixed; inset: 0; z-index: 200;
+            background: var(--white);
+            padding: 24px;
+            transform: translateX(100%);
+            transition: transform .3s ease;
+        }
+        .mobile-nav.open { transform: none; }
+        .mobile-nav__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .mobile-nav__logo img { height: 40px; }
+        .mobile-nav__close { font-size: 24px; color: var(--grey-500); }
+        .mobile-nav__links { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+        .mobile-link { display: block; padding: 14px 0; font-size: 18px; font-weight: 600; border-bottom: 1px solid var(--grey-200); }
+
+        /* ── PAGE HERO ── */
+        .page-hero {
+            background: linear-gradient(135deg, #0057b3 0%, #007dff 50%, #3399ff 100%);
+            color: var(--white);
+            padding: 64px 0;
+        }
+        .page-hero__tag { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; opacity: .75; margin-bottom: 12px; }
+        .page-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; line-height: 1.1; }
+        .page-hero p { margin-top: 16px; font-size: 18px; opacity: .8; max-width: 560px; }
+
+        /* ── SECTION ── */
+        .section { padding: 80px 0; }
+        .section--grey { background: var(--grey-250); }
+
+        /* ── TEAM ── */
+        .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .team-card {
+            background: var(--white);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .team-card__avatar {
+            width: 260px; height: 260px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 48px; font-weight: 700; color: var(--white);
+            margin-bottom: 20px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .team-card__avatar img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+        }
+        .team-card__avatar { cursor: pointer; transition: opacity .2s; }
+        .team-card__avatar:hover { opacity: .85; }
+        .team-card__name { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 4px; cursor: pointer; }
+        .team-card__name:hover { color: var(--primary); }
+        .team-card__role { font-size: 13px; font-weight: 600; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; }
+
+        /* ── MODAL ── */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 300;
+            background: rgba(0,0,0,.45);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity .3s;
+            padding: 24px;
+        }
+        .modal-overlay.open { opacity: 1; pointer-events: auto; }
+        .modal-overlay.open ~ * { filter: blur(4px); }
+        body.modal-open .page-blur { filter: blur(6px); transition: filter .3s; }
+        .modal {
+            background: var(--white);
+            max-width: 800px; width: 100%;
+            padding: 56px;
+            position: relative;
+            transform: translateY(24px);
+            transition: transform .3s;
+            box-shadow: 0 24px 64px rgba(0,0,0,.18);
+        }
+        .modal-overlay.open .modal { transform: translateY(0); }
+        .modal__close {
+            position: absolute; top: 20px; right: 28px;
+            font-size: 28px; color: var(--grey-400); cursor: pointer; background: none; border: none;
+            line-height: 1;
+        }
+        .modal__close:hover { color: var(--dark); }
+        .modal__header { display: flex; align-items: center; gap: 28px; margin-bottom: 32px; }
+        .modal__avatar {
+            width: 110px; height: 110px; border-radius: 50%; overflow: hidden;
+            background: var(--primary); flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 36px; font-weight: 700; color: var(--white);
+        }
+        .modal__avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .modal__name { font-size: 24px; font-weight: 700; color: var(--dark); }
+        .modal__role { font-size: 14px; font-weight: 600; color: var(--primary); text-transform: uppercase; letter-spacing: .06em; margin-top: 6px; }
+        .modal__quote {
+            font-size: 19px; line-height: 1.9; color: var(--grey-500); font-style: italic;
+        }
+        .modal__quote::before {
+            content: '\201C';
+            font-size: 72px; line-height: 0; vertical-align: -26px;
+            color: var(--primary); font-style: normal; margin-right: 6px;
+        }
+
+        /* ── FOOTER ── */
+        .site-footer { background: var(--dark); color: var(--white); }
+        .footer__main { padding: 64px 0 48px; }
+        .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+        .footer__brand p { font-size: 14px; color: rgba(255,255,255,.55); margin-top: 16px; line-height: 1.7; max-width: 280px; }
+        .footer__logo img { height: 40px; width: auto; filter: brightness(0) invert(1); }
+        .footer__col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.5); margin-bottom: 20px; }
+        .footer__col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer__col ul li a { font-size: 14px; color: rgba(255,255,255,.7); transition: color .2s; }
+        .footer__col ul li a:hover { color: var(--white); }
+        .footer__bottom {
+            border-top: 1px solid rgba(255,255,255,.1);
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .footer__bottom p { font-size: 13px; color: rgba(255,255,255,.4); }
+        .footer__bottom-links { display: flex; gap: 24px; }
+        .footer__bottom-links a { font-size: 13px; color: rgba(255,255,255,.4); transition: color .2s; }
+        .footer__bottom-links a:hover { color: rgba(255,255,255,.8); }
+
+        /* ── ANIMATIONS ── */
+        [data-anim] { opacity: 0; transition-property: opacity, transform; transition-timing-function: cubic-bezier(.22,.61,.36,1); transition-duration: .7s; }
+        [data-anim="fade-up"]    { transform: translateY(36px); }
+        [data-anim="fade-left"]  { transform: translateX(-48px); }
+        [data-anim].anim-visible { opacity: 1; transform: none; }
+        [data-stagger] > * { opacity: 0; transform: translateY(28px); transition: opacity .55s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1); }
+        [data-stagger].anim-visible > *:nth-child(1) { transition-delay: .05s; }
+        [data-stagger].anim-visible > *:nth-child(2) { transition-delay: .12s; }
+        [data-stagger].anim-visible > *:nth-child(3) { transition-delay: .19s; }
+        [data-stagger].anim-visible > *:nth-child(4) { transition-delay: .26s; }
+        [data-stagger].anim-visible > * { opacity: 1; transform: none; }
+
+        @media (max-width: 768px) {
+            .header__nav, .header__actions .btn--primary, .header__actions .btn--search { display: none; }
+            .burger { display: flex; }
+            .header__inner { height: 64px; }
+            .header__logo img { height: 48px; }
+            .section { padding: 48px 0; }
+            .team-grid { grid-template-columns: 1fr; }
+            .footer__grid { grid-template-columns: 1fr; }
+            .footer__bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar__inner">
+                <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
+                    <span id="lang-label">MN 🇲🇳</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header" id="site-header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="index.html" class="header__logo">
+                    <img src="assets/logover2.png" alt="ICC Mongolia">
+                </a>
+                <nav class="header__nav" aria-label="Primary navigation">
+                    <div class="nav__item">
+                        <a href="index.html#about" class="nav__link">
+                            <span data-i18n="nav_about">About</span>
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,4 6,8 10,4"/></svg>
+                        </a>
+                        <div class="nav__dropdown">
+                            <a href="greeting.html" data-i18n="nav_greeting">Chairman's Greeting</a>
+                            <a href="board.html" data-i18n="nav_board">Board of Directors</a>
+                            <a href="team.html" data-i18n="nav_team">Our Team</a>
+                            <a href="index.html#about" data-i18n="nav_about_icc">About ICC Mongolia</a>
+                            <a href="internship.html" data-i18n="nav_internship">Internship Opportunities</a>
+                        </div>
+                    </div>
+                    <div class="nav__item">
+                        <a href="index.html#membership" class="nav__link" data-i18n="nav_membership">Membership</a>
+                    </div>
+                    <div class="nav__item">
+                        <a href="news.html" class="nav__link" data-i18n="nav_news_events">News &amp; Events</a>
+                    </div>
+                    <div class="nav__item">
+                        <a href="index.html#contact" class="nav__link" data-i18n="nav_contact">Contact</a>
+                    </div>
+                </nav>
+                <div class="header__actions">
+                    <button class="btn btn--search" aria-label="Search">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </button>
+                    <a href="index.html#membership" class="btn btn--primary" data-i18n="nav_join">Join ICC</a>
+                    <button class="burger" id="burger-btn" aria-label="Open menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav__header">
+            <div class="mobile-nav__logo">
+                <img src="assets/logover2.png" alt="ICC Mongolia">
+            </div>
+            <button class="mobile-nav__close" id="mobile-nav-close">✕</button>
+        </div>
+        <ul class="mobile-nav__links">
+            <li><a href="index.html#about" class="mobile-link" data-i18n="nav_about">About</a></li>
+            <li><a href="index.html#membership" class="mobile-link" data-i18n="nav_membership">Membership</a></li>
+            <li><a href="index.html#news" class="mobile-link" data-i18n="nav_news">News</a></li>
+            <li><a href="index.html#contact" class="mobile-link" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+        <div style="margin-top:32px;">
+            <a href="index.html#membership" class="btn btn--primary" style="width:100%;justify-content:center;" data-i18n="mobile_join">Join ICC Mongolia</a>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero__tag" data-i18n="team_tag">Leadership</div>
+            <h1 data-i18n="team_title">Our Team</h1>
+            <p data-i18n="team_subtitle">The people leading ICC Mongolia's mission.</p>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section">
+        <div class="container">
+            <div class="team-grid" data-stagger>
+                <div class="team-card">
+                    <div class="team-card__avatar" data-member="myadagmaa"><img src="assets/_C7A9876.jpg" alt="Myadagmaa Jadambaa" style="object-position: center 20%;"></div>
+                    <div class="team-card__name" data-member="myadagmaa" data-i18n="team2_name">Myadagmaa Jadambaa</div>
+                    <div class="team-card__role" data-i18n="team2_role">Secretary General &amp; Board Member</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-card__avatar" data-member="nominchimeg">NB</div>
+                    <div class="team-card__name" data-member="nominchimeg">Nominchimeg Bat-Erdene</div>
+                    <div class="team-card__role">Accountant</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-card__avatar" data-member="enkhjargal">ET</div>
+                    <div class="team-card__name" data-member="enkhjargal">Enkhjargal Tserendorj</div>
+                    <div class="team-card__role">Graphic Designer</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-card__avatar" data-member="gantulga">GN</div>
+                    <div class="team-card__name" data-member="gantulga">Gantulga Naranbaatar</div>
+                    <div class="team-card__role">Trade Relations Coordinator</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Greeting Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <button class="modal__close" id="modal-close">✕</button>
+            <div class="modal__header">
+                <div class="modal__avatar" id="modal-avatar"></div>
+                <div>
+                    <div class="modal__name" id="modal-name"></div>
+                    <div class="modal__role" id="modal-role"></div>
+                </div>
+            </div>
+            <p class="modal__quote" id="modal-quote"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__main">
+                <div class="footer__grid">
+                    <div class="footer__brand">
+                        <div class="footer__logo">
+                            <img src="assets/logover2.png" alt="ICC Mongolia">
+                        </div>
+                        <p data-i18n="footer_brand">ICC Mongolia is the national committee of the International Chamber of Commerce — the world's largest business organisation, with over 45 million members in 170+ countries.</p>
+                    </div>
+                    <div class="footer__col">
+                        <h4 data-i18n="footer_col1_title">Organisation</h4>
+                        <ul>
+                            <li><a href="index.html#about" data-i18n="nav_about_icc">About ICC Mongolia</a></li>
+                            <li><a href="#" data-i18n="nav_governance">Governance</a></li>
+                            <li><a href="team.html" data-i18n="nav_team">Our Team</a></li>
+                            <li><a href="#" data-i18n="nav_reports">Annual Reports</a></li>
+                            <li><a href="#" data-i18n="topbar_careers">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h4 data-i18n="footer_col2_title">Services</h4>
+                        <ul>
+                            <li><a href="index.html#services" data-i18n="footer_all_services">All Services</a></li>
+                            <li><a href="#" data-i18n="nav_arbitration">Arbitration</a></li>
+                            <li><a href="#" data-i18n="nav_trade">Trade Facilitation</a></li>
+                            <li><a href="#" data-i18n="nav_policy">Policy Advocacy</a></li>
+                            <li><a href="#" data-i18n="card3_title">Business Networking</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h4 data-i18n="footer_col3_title">Resources</h4>
+                        <ul>
+                            <li><a href="index.html#news" data-i18n="nav_news">News</a></li>
+                            <li><a href="index.html#events" data-i18n="nav_events">Events</a></li>
+                            <li><a href="#" data-i18n="nav_publications">Publications</a></li>
+                            <li><a href="#" data-i18n="footer_incoterms">Incoterms® 2020</a></li>
+                            <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p data-i18n="footer_copyright">© 2025 ICC Mongolia. All rights reserved.</p>
+                <div class="footer__bottom-links">
+                    <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+                    <a href="#" data-i18n="footer_terms">Terms of Use</a>
+                    <a href="#" data-i18n="footer_cookies">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                topbar_careers: 'Careers',
+                nav_about: 'About',
+                nav_about_icc: 'About ICC Mongolia',
+                nav_governance: 'Governance',
+                nav_team: 'Our Team',
+                nav_board: 'Board of Directors',
+                nav_greeting: "Chairman's Greeting",
+                nav_reports: 'Annual Reports',
+                nav_services: 'Services',
+                nav_arbitration: 'Arbitration & ADR',
+                nav_trade: 'Trade Facilitation',
+                nav_business: 'Business Solutions',
+                nav_policy: 'Policy Advocacy',
+                nav_membership: 'Membership',
+                nav_news_events: 'News & Events',
+                nav_news: 'News',
+                nav_events: 'Events',
+                nav_publications: 'Publications',
+                nav_contact: 'Contact',
+                nav_join: 'Join ICC',
+                mobile_join: 'Join ICC Mongolia',
+                team_tag: 'Leadership',
+                team_title: 'Our Team',
+                team_subtitle: "The people leading ICC Mongolia's mission.",
+                team1_name: 'Lkhagvasuren Damdinsuren',
+                team1_role: 'President & Chairman',
+                team2_name: 'Myadagmaa Jadambaa',
+                team2_role: 'Secretary General & Board Member',
+                team3_name: 'Amartuvshin Hanibal',
+                team3_role: 'Board Member',
+                team4_name: 'Erdenechimeg',
+                team4_role: 'Deputy Chairwoman',
+                footer_brand: "ICC Mongolia is the national committee of the International Chamber of Commerce — the world's largest business organisation, with over 45 million members in 170+ countries.",
+                footer_col1_title: 'Organisation',
+                footer_col2_title: 'Services',
+                footer_col3_title: 'Resources',
+                footer_all_services: 'All Services',
+                footer_incoterms: 'Incoterms® 2020',
+                footer_copyright: '© 2025 ICC Mongolia. All rights reserved.',
+                footer_privacy: 'Privacy Policy',
+                footer_terms: 'Terms of Use',
+                footer_cookies: 'Cookies',
+                card3_title: 'Business Networking',
+            },
+            mn: {
+                topbar_careers: 'Ажлын байр',
+                nav_about: 'Бидний тухай',
+                nav_about_icc: 'ICC Монгол тухай',
+                nav_governance: 'Засаглал',
+                nav_team: 'Манай баг',
+                nav_board: 'Захирлуудын зөвлөл',
+                nav_greeting: 'Даргын мэндчилгээ',
+                nav_reports: 'Жилийн тайлан',
+                nav_services: 'Үйлчилгээ',
+                nav_arbitration: 'Арбитр & ADR',
+                nav_trade: 'Худалдаа хөнгөвчлөх',
+                nav_business: 'Бизнесийн шийдэл',
+                nav_policy: 'Бодлогын өмгөөлөл',
+                nav_membership: 'Гишүүнчлэл',
+                nav_news_events: 'Мэдээ & Арга хэмжээ',
+                nav_news: 'Мэдээ',
+                nav_events: 'Арга хэмжээ',
+                nav_publications: 'Хэвлэлүүд',
+                nav_contact: 'Холбоо барих',
+                nav_join: 'ICC-д нэгдэх',
+                mobile_join: 'ICC Монголд нэгдэх',
+                team_tag: 'Удирдлага',
+                team_title: 'Манай Баг',
+                team_subtitle: 'ICC Монголын эрхэм зорилгыг удирдан чиглүүлэгч хүмүүс.',
+                team1_name: 'Лхагвасүрэн Дамдинсүрэн',
+                team1_role: 'Ерөнхийлөгч & Дарга',
+                team2_name: 'Мядагмаа Жадамба',
+                team2_role: 'Ерөнхий нарийн бичгийн дарга & Зөвлөлийн гишүүн',
+                team3_name: 'Амартүвшин Ханибал',
+                team3_role: 'Зөвлөлийн гишүүн',
+                team4_name: 'Эрдэнэчимэг',
+                team4_role: 'Дэд дарга',
+                footer_brand: 'ICC Монгол нь 170 гаруй оронд 45 саяас дээш гишүүнтэй дэлхийн хамгийн том бизнесийн байгууллага болох Олон Улсын Худалдааны Танхимын үндэсний хороо юм.',
+                footer_col1_title: 'Байгууллага',
+                footer_col2_title: 'Үйлчилгээ',
+                footer_col3_title: 'Нөөц',
+                footer_all_services: 'Бүх үйлчилгээ',
+                footer_incoterms: 'Incoterms® 2020',
+                footer_copyright: '© 2025 ICC Монгол. Бүх эрх хуулиар хамгаалагдсан.',
+                footer_privacy: 'Нууцлалын бодлого',
+                footer_terms: 'Үйлчилгээний нөхцөл',
+                footer_cookies: 'Күүки',
+                card3_title: 'Бизнесийн Сүлжээ',
+            }
+        };
+
+        let currentLang = 'en';
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key] !== undefined) el.innerHTML = t[key];
+            });
+            document.getElementById('lang-label').textContent = lang === 'en' ? 'MN 🇲🇳' : 'EN 🌐';
+            document.documentElement.lang = lang === 'en' ? 'en' : 'mn';
+        }
+        document.getElementById('lang-toggle').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'mn' : 'en';
+            applyLanguage(currentLang);
+        });
+
+        // Header scroll
+        const header = document.getElementById('site-header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 10));
+
+        // Mobile nav
+        document.getElementById('burger-btn').addEventListener('click', () => document.getElementById('mobile-nav').classList.add('open'));
+        document.getElementById('mobile-nav-close').addEventListener('click', () => document.getElementById('mobile-nav').classList.remove('open'));
+        document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => document.getElementById('mobile-nav').classList.remove('open')));
+
+        // Member greetings
+        const members = {
+            myadagmaa: {
+                name: 'Myadagmaa Jadambaa',
+                role: 'Secretary General & Board Member',
+                avatar: '<img src="assets/_C7A9876.jpg" alt="Myadagmaa Jadambaa">',
+                quote: "Every day at ICC Mongolia is an opportunity to build bridges — between businesses, between countries, and between ideas. My work in international arbitration and trade has shown me that when the right frameworks are in place, commerce flourishes and communities prosper. I am deeply committed to making ICC Mongolia a trusted partner for every business that chooses to grow beyond our borders."
+            },
+            amartuvshin: {
+                name: 'Amartuvshin Hanibal',
+                role: 'Board Member',
+                avatar: 'AH',
+                quote: "Mongolia's business community has never been more dynamic or more ready for the global stage. As a Board Member of ICC Mongolia, I focus on connecting our members with the policies, partnerships, and platforms they need to compete internationally. I believe that strong institutions and transparent governance are the foundation upon which lasting business success is built."
+            },
+            erdenechimeg: {
+                name: 'Erdenechimeg',
+                role: 'Deputy Chairwoman',
+                avatar: 'EC',
+                quote: "I joined ICC Mongolia because I believe in the transformative power of international trade for Mongolian women, families, and communities. My role as Deputy Chairwoman is to ensure that our organisation remains accessible, inclusive, and genuinely impactful — not just for large corporations, but for the entrepreneurs and small businesses who are the backbone of our economy. I am proud to serve alongside such a dedicated team."
+            },
+            nominchimeg: {
+                name: 'Nominchimeg Bat-Erdene',
+                role: 'Accountant',
+                avatar: 'NB',
+                quote: "Numbers tell the story of an organisation's health and integrity. At ICC Mongolia, I take pride in ensuring that every transaction reflects our commitment to transparency and responsible stewardship. Sound financial management is what allows us to focus on what truly matters — supporting Mongolian businesses and advancing international commerce."
+            },
+            enkhjargal: {
+                name: 'Enkhjargal Tserendorj',
+                role: 'Graphic Designer',
+                avatar: 'ET',
+                quote: "Design is how ICC Mongolia speaks without words. Every visual we create carries the weight of our mission — to look credible, modern, and approachable to businesses across the world. I believe great design builds trust, and I bring that belief to everything from our publications to our digital presence."
+            },
+            gantulga: {
+                name: 'Gantulga Naranbaatar',
+                role: 'Trade Relations Coordinator',
+                avatar: 'GN',
+                quote: "Trade is about people before it is about products. My role at ICC Mongolia is to nurture the human connections that make cross-border commerce possible — building relationships with foreign chambers, trade attachés, and international partners. Every partnership I help forge is a new door opened for a Mongolian business."
+            }
+        };
+
+        const overlay = document.getElementById('modal-overlay');
+        const blurTargets = ['topbar', 'site-header', 'mobile-nav'].map(id => document.getElementById(id))
+            .concat([...document.querySelectorAll('.page-hero, .section, .site-footer')]);
+
+        function openModal(key) {
+            const m = members[key];
+            if (!m) return;
+            document.getElementById('modal-avatar').innerHTML = m.avatar;
+            document.getElementById('modal-name').textContent = m.name;
+            document.getElementById('modal-role').textContent = m.role;
+            document.getElementById('modal-quote').textContent = m.quote;
+            overlay.classList.add('open');
+            blurTargets.forEach(el => el && el.style.setProperty('filter', 'blur(6px)'));
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            overlay.classList.remove('open');
+            blurTargets.forEach(el => el && el.style.removeProperty('filter'));
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('[data-member]').forEach(el => {
+            el.addEventListener('click', () => openModal(el.getAttribute('data-member')));
+        });
+        document.getElementById('modal-close').addEventListener('click', closeModal);
+        overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        // Scroll animations
+        const animObserver = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('anim-visible');
+                else e.target.classList.remove('anim-visible');
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+        document.querySelectorAll('[data-anim]').forEach(el => animObserver.observe(el));
+
+        const staggerObserver = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('anim-visible');
+                else e.target.classList.remove('anim-visible');
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+        document.querySelectorAll('[data-stagger]').forEach(el => staggerObserver.observe(el));
+    </script>
+</body>
+</html>
